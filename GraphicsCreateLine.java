@@ -30,17 +30,17 @@ import javafx.scene.layout.Pane;
 public class GraphicsCreateLine implements GraphicsCommand {
 	private Pane graphics_pane;
 	private GraphicsCurvedLine curved_line;
-	
+
 	public GraphicsCreateLine(Pane graphicspane, GraphicsCurvedLine curvedline) {
 		graphics_pane = graphicspane;
 		curved_line = curvedline;
 	}
-	
+
 	@Override
 	public void undo() {
 		graphics_pane.getChildren().remove(curved_line.getLine());
 	}
-	
+
 	@Override
 	public void redo() {
 		graphics_pane.getChildren().add(curved_line.getLine());

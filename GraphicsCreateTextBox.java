@@ -32,7 +32,7 @@ public class GraphicsCreateTextBox implements GraphicsCommand {
 	private GraphicsTextBox text_box;
 	private Pane graphics_pane;
 	private ArrayList<GraphicsTextBox> text_boxes_list;
-		
+
 	public GraphicsCreateTextBox(Pane graphicspane, ArrayList<GraphicsTextBox> textarray, GraphicsTextBox textbox)  {
 		graphics_pane = graphicspane;
 		text_boxes_list = textarray;

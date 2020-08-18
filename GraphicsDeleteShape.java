@@ -32,19 +32,19 @@ public class GraphicsDeleteShape implements GraphicsCommand {
 	private Pane graphics_pane;
 	private ArrayList<GraphicsShape> shapes_list;
 	private GraphicsShape graphics_shape;
-	
+
 	public GraphicsDeleteShape(Pane graphicspane, ArrayList<GraphicsShape> shapes, GraphicsShape shape) {
 		graphics_pane = graphicspane;
 		shapes_list = shapes;
 		graphics_shape = shape;
 	}
-	
+
 	@Override
 	public void undo() {
 		graphics_pane.getChildren().add(graphics_shape.getNode());
 		shapes_list.add(graphics_shape);
 	}
-	
+
 	@Override
 	public void redo() {
 		graphics_pane.getChildren().remove(graphics_shape.getNode());

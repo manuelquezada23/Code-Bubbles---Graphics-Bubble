@@ -31,18 +31,18 @@ public class GraphicsRotate implements GraphicsCommand {
 	private GraphicsShape graphics_shape;
 	private Point2D prev_point;
 	private Point2D curr_point;
-	
+
 	public GraphicsRotate(GraphicsShape shape, Point2D prev, Point2D curr) {
 		graphics_shape = shape;
 		prev_point = prev;
 		curr_point = curr;
 	}
-	
+
 	@Override
 	public void undo() {
 		graphics_shape.getNode().setRotate(graphics_shape.rotateShape(prev_point, curr_point));
 	}
-	
+
 	@Override
 	public void redo() {
 		graphics_shape.getNode().setRotate(graphics_shape.rotateShape(curr_point, prev_point));

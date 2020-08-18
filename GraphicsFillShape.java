@@ -1,6 +1,6 @@
 /********************************************************************************/
 /*										*/
-/*		GraphicsShapeResize.java 					*/
+/*		GraphicsFillShape.java 					*/
 /*										*/
 /*	Bubbles Environment Auxillary & Missing items feedback report		*/
 /*										*/
@@ -20,49 +20,34 @@
 
 package edu.brown.cs.bubbles.graphics;
 
+import javafx.scene.paint.Color;
+
 /********************************************************************************/
 /*										*/
-/*	Command class for resizing shapes 						*/
+/*	Command class for filling shapes 						*/
 /*										*/
 /********************************************************************************/
-public class GraphicsShapeResize implements GraphicsCommand {
-	@SuppressWarnings("unused")
-	private double current_x;
-	@SuppressWarnings("unused")
-	private double current_y;
-	private double shape_width;
-	private double shape_height;
+public class GraphicsFillShape implements GraphicsCommand {
 	private GraphicsShape graphics_shape;
-	private double old_x;
-	private double old_y;
-	private double old_height;
-	private double old_width;
-
-	public GraphicsShapeResize(double x, double y, double width, double height, GraphicsShape shape) {
-		current_x = x;
-		current_y = y;
-		shape_width = width;
-		shape_height = height;
-		graphics_shape = shape;
+	private Color new_color;
+	private Color old_color;
+	
+	public GraphicsFillShape (GraphicsShape shape, Color color) {
+		graphics_shape = shape; 
+		old_color = graphics_shape.getFill();
+		new_color = color;
 	}
-
+	
 	@Override
 	public void undo() {
-		old_x = graphics_shape.getCenter().getX();
-		old_y = graphics_shape.getCenter().getY();
-		old_height = graphics_shape.getHeight();
-		old_width = graphics_shape.getWidth();
-		graphics_shape.setLocation(old_x, old_y);
-		graphics_shape.setHeight(shape_height);
-		graphics_shape.setWidth(shape_width);
+		new_color = graphics_shape.getFill();
+		graphics_shape.setFill(old_color);
 	}
-
+ 
 	@Override
 	public void redo() {
-		graphics_shape.setWidth(old_width);
-		graphics_shape.setHeight(old_height);
-		graphics_shape.setLocation(old_x, old_y);
+		graphics_shape.setFill(new_color);
 	}
-} // end of class GraphicsShapeResize
+} // end of class GraphicsFillShape
 
-/* end of GraphicsShapeResize.java */
+/* end of GraphicsFillShape.java */

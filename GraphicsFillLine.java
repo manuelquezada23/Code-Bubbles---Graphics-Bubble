@@ -1,6 +1,6 @@
 /********************************************************************************/
 /*										*/
-/*		GraphicsShapeResize.java 					*/
+/*		GraphicsFillLine.java 					*/
 /*										*/
 /*	Bubbles Environment Auxillary & Missing items feedback report		*/
 /*										*/
@@ -20,49 +20,34 @@
 
 package edu.brown.cs.bubbles.graphics;
 
-/********************************************************************************/
-/*										*/
-/*	Command class for resizing shapes 						*/
-/*										*/
-/********************************************************************************/
-public class GraphicsShapeResize implements GraphicsCommand {
-	@SuppressWarnings("unused")
-	private double current_x;
-	@SuppressWarnings("unused")
-	private double current_y;
-	private double shape_width;
-	private double shape_height;
-	private GraphicsShape graphics_shape;
-	private double old_x;
-	private double old_y;
-	private double old_height;
-	private double old_width;
+import javafx.scene.paint.Color;
 
-	public GraphicsShapeResize(double x, double y, double width, double height, GraphicsShape shape) {
-		current_x = x;
-		current_y = y;
-		shape_width = width;
-		shape_height = height;
-		graphics_shape = shape;
+/********************************************************************************/
+/*										*/
+/*	Command class for filling shapes 						*/
+/*										*/
+/********************************************************************************/
+public class GraphicsFillLine implements GraphicsCommand {
+	private GraphicsCurvedLine graphics_line;
+	private Color new_color;
+	private Color old_color;
+	
+	public GraphicsFillLine (GraphicsCurvedLine line, Color color) {
+		graphics_line = line; 
+		old_color = graphics_line.getFill();
+		new_color = color;
 	}
-
+	
 	@Override
 	public void undo() {
-		old_x = graphics_shape.getCenter().getX();
-		old_y = graphics_shape.getCenter().getY();
-		old_height = graphics_shape.getHeight();
-		old_width = graphics_shape.getWidth();
-		graphics_shape.setLocation(old_x, old_y);
-		graphics_shape.setHeight(shape_height);
-		graphics_shape.setWidth(shape_width);
+		new_color = graphics_line.getFill();
+		graphics_line.setFill(old_color);
 	}
-
+ 
 	@Override
 	public void redo() {
-		graphics_shape.setWidth(old_width);
-		graphics_shape.setHeight(old_height);
-		graphics_shape.setLocation(old_x, old_y);
+		graphics_line.setFill(new_color);
 	}
-} // end of class GraphicsShapeResize
+} // end of class GraphicsFill
 
-/* end of GraphicsShapeResize.java */
+/* end of GraphicsFill.java */

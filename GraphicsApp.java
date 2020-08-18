@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class GraphicsApp extends Application {
 	private Scene the_scene;
 	private Stage the_stage;
-	
+
 	/********************************************************************************/
 	/*										*/
 	/*	Stage and scene creation 						*/
@@ -38,25 +38,25 @@ public class GraphicsApp extends Application {
     @Override
     public void start(Stage stage) {
     	the_stage = stage;
-    	GraphicsPaneOrganizer organizer = new GraphicsPaneOrganizer(); 
-    	the_scene = new Scene(organizer.getStack(), 570, 400); 
-    	the_stage.setScene(the_scene); 
-    	the_stage.setTitle("Graphics Bubble"); 
-    	the_stage.show(); 
+    	GraphicsPaneOrganizer organizer = new GraphicsPaneOrganizer();
+    	the_scene = new Scene(organizer.getStack(), 570, 400);
+    	the_stage.setScene(the_scene);
+    	the_stage.setTitle("Graphics Bubble");
+    	the_stage.show();
     }
-    
+
     public static void main(String[] argv) {
         launch(argv);
     }
-    
+
     public ReadOnlyDoubleProperty getSceneWidthProperty() {
     	return the_scene.widthProperty();
     }
-    
+
     public double getSceneHeight() {
     	return the_scene.getHeight();
     }
-    
+
     public double getSceneWidth() {
     	return the_scene.getWidth();
     }

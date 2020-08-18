@@ -51,7 +51,7 @@ public class GraphicsImages {
 	private ClipboardContent graphics_content;
 	private Pane graphics_pane;
 	private Image copied_image;
-	
+
 	/********************************************************************************/
 	/*										*/
 	/*	Creation of copy-paste images 						*/
@@ -81,11 +81,11 @@ public class GraphicsImages {
 		}
 	}
 
-	
+
 	public ClipboardContent getContent() {
 		return graphics_content;
 	}
-	
+
 	public boolean isFocused() {
 		if (image_view != null) {
 			return image_view.isFocused();
@@ -93,7 +93,7 @@ public class GraphicsImages {
 			return false;
 		}
 	}
-	
+
 	public void moveImage(Point2D prev, Point2D curr) {
 		Double xLoc = prev.getX() - this.getXLoc();
 		Double yLoc = prev.getY() - this.getYLoc();
@@ -101,42 +101,42 @@ public class GraphicsImages {
 		Double dy = curr.getY() - yLoc;
 		this.setLocation(dx, dy);
 	}
-	
+
 	public void setBorder(String string) {
 		if (image_view != null) {
 			image_view.setStyle(string);
 		}
 	}
-	
+
 	public void removeBorder() {
 		image_view.setStyle(null);
 	}
-	
+
 	public void setLocation(double x, double y) {
 		this.setXLoc(x);
 		this.setYLoc(y);
 	}
-	
-	public void setXLoc(double x) { 
+
+	public void setXLoc(double x) {
 		image_view.setX(x);
 	}
-	
+
 	public void setYLoc(double y) {
 		image_view.setY(y);
 	}
-	
-	public double getXLoc() { 
+
+	public double getXLoc() {
 		return image_view.getX();
 	}
 
-	public double getYLoc() { 
+	public double getYLoc() {
 		return image_view.getY();
 	}
-	
+
 	public Node getNode() {
 		return image_view;
 	}
-	
+
 	public boolean contains(double x, double y) {
 		if (image_view != null) {
 			if (image_view.contains(x, y)) {
@@ -150,7 +150,7 @@ public class GraphicsImages {
 			return false;
 		}
 	}
-	
+
 	public void copyImage() {
 		if (image_view != null) {
 			copied_image = image_view.getImage();
@@ -160,26 +160,26 @@ public class GraphicsImages {
 			graphics_clipboard.setContent(graphics_content);
 		}
 	}
-	
+
 	public void resizeImage(Point2D prev, Point2D curr) {
 		double_rotation = image_view.getRotate();
 		old_center = this.getCenter();
 		rotated_prev = this.rotatePoint(prev, old_center, double_rotation);
 		rotated_curr = this.rotatePoint(curr, old_center, double_rotation);
-		
+
 		double dx = Math.abs(rotated_curr.getX() - rotated_prev.getX());
 		double dy = Math.abs(rotated_curr.getY() - rotated_prev.getY());
-		
+
 		if (Math.abs(this.getCenter().getX() - rotated_prev.getX()) > Math.abs(this.getCenter().getX() - rotated_curr.getX())) {
 			dx = -1 * dx;
 		}
 		if (Math.abs(this.getCenter().getY() - rotated_prev.getY()) > Math.abs(this.getCenter().getY() - rotated_curr.getY())) {
 			dy = -1 * dy;
 		}
-		
+
 		image_view.setFitWidth(image_view.getFitWidth() + 2 * dx);
 		image_view.setFitHeight(image_view.getFitHeight() + 2 * dy);
-		
+
 		new_center = this.getCenter();
 		if (!(new_center == old_center)) {
 			double centerdx = old_center.getX() - new_center.getX();
@@ -187,23 +187,23 @@ public class GraphicsImages {
 			this.setLocation(this.getXLoc() + centerdx, this.getYLoc() + centerdy);
 		}
 	}
-	
+
 	public void setWidth(double x) {
 		image_view.setFitWidth(x);
 	}
-	
+
 	public void setHeight(double y) {
 		image_view.setFitHeight(y);
 	}
-	
+
 	public double getWidth() {
 		return image_view.getFitWidth();
 	}
-	
+
 	public double getHeight() {
 		return image_view.getFitHeight();
 	}
-	
+
 	public Point2D rotatePoint(Point2D pointtorotate, Point2D rotatearound, double angle) {
 		double sine = Math.sin(Math.toRadians(angle));
 		double cosine = Math.cos(Math.toRadians(angle));
@@ -212,13 +212,13 @@ public class GraphicsImages {
 		image_point = new Point2D(image_point.getX() + rotatearound.getX(), image_point.getY() + rotatearound.getY());
 		return image_point;
 	}
-	
+
 	public Point2D getCenter() {
-		Point2D point = new Point2D(image_view.getX() + image_view.maxWidth(image_view.getFitWidth())/2, 
+		Point2D point = new Point2D(image_view.getX() + image_view.maxWidth(image_view.getFitWidth())/2,
 				image_view.getY() + image_view.maxHeight(image_view.getFitHeight())/2);
 		return point;
 	}
-	
+
 	/********************************************************************************/
 	/*										*/
 	/*	Method to convert awt images to FX images 						*/

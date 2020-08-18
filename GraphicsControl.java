@@ -55,28 +55,28 @@ public class GraphicsControl {
 	private static Spinner<Integer> graphics_spinner;
 	private static ChoiceBox<String> graphics_fonts;
 	private Pane panels_pane;
-	
+
 	public GraphicsControl(Pane graphicspane, GraphicsMain graphics) {
 		graphics_pane = graphicspane;
-		
+
 		VBox buttons = new VBox();
 		main_graphics = graphics;
-		
+
         Node radiobuttonspanel = createRadioButtonsPanel();
         radiobuttonspanel.relocate(0, 0);
         panels_pane = new Pane();
         panels_pane.getChildren().addAll(radiobuttonspanel);
-        
+
         buttons.getChildren().add(panels_pane);
         graphics_pane.getChildren().add(buttons);
-       
-        
+
+
 	}
-	
+
 	public Pane getButtonsPane() {
 		return panels_pane;
 	}
-	
+
 	/********************************************************************************/
 	/*										*/
 	/*	Button creation methods 						*/
@@ -84,21 +84,21 @@ public class GraphicsControl {
 	/********************************************************************************/
 	private static Node createRadioButtonsPanel() {
     	VBox vbox = new VBox();
-    	
+
     	HBox radiobuttons = new HBox();
-    	
+
     	ToggleGroup toggle = new ToggleGroup();
-    	    	
-    	RadioButton rectangle = new RadioButton("rectangle"); 	
+
+    	RadioButton rectangle = new RadioButton("rectangle");
     	rectangle.setToggleGroup(toggle);
-    	rectangle.setSelected(false);	
+    	rectangle.setSelected(false);
     	rectangle.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				main_graphics.setCurrentRadioButton(GraphicsOption.drawrectangle);
 			}
-    	});    	
-    	
+    	});
+
     	RadioButton pen = new RadioButton("pen");
     	pen.setToggleGroup(toggle);
     	pen.setSelected(false);
@@ -108,7 +108,7 @@ public class GraphicsControl {
 				main_graphics.setCurrentRadioButton(GraphicsOption.draw);
 			}
     	});
-    	
+
     	RadioButton text = new RadioButton("text");
     	text.setToggleGroup(toggle);
     	text.setSelected(false);
@@ -118,7 +118,7 @@ public class GraphicsControl {
 				main_graphics.setCurrentRadioButton(GraphicsOption.text);
 			}
     	});
-    	
+
     	RadioButton paste = new RadioButton("paste image");
     	paste.setToggleGroup(toggle);
     	paste.setSelected(false);
@@ -128,7 +128,7 @@ public class GraphicsControl {
     			main_graphics.setCurrentRadioButton(GraphicsOption.paste);
     		}
     	});
-    	
+
     	RadioButton copy = new RadioButton("copy image");
     	copy.setToggleGroup(toggle);
     	copy.setSelected(false);
@@ -138,7 +138,7 @@ public class GraphicsControl {
     			main_graphics.setCurrentRadioButton(GraphicsOption.copy);
     		}
     	});
-    	
+
     	Button help = new Button("?");
     	help.setStyle("-fx-background-radius: 5em;");
     	help.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
@@ -161,7 +161,7 @@ public class GraphicsControl {
     			Label cut2 = new Label("the delete key.");
     			Popup pop = new Popup();
     			pop.getContent().addAll(create, create2, move, rotate, resize, paste, paste2, copy, copy2, cut, cut2);
-    			pop.setAutoHide(true); 
+    			pop.setAutoHide(true);
 
     			vbox.getChildren().addAll(create, create2, move, rotate, resize, paste, paste2, copy, copy2, cut, cut2);
     			Scene scene = new Scene(vbox, 270, 210);
@@ -169,12 +169,12 @@ public class GraphicsControl {
     			stage.show();
     		}
     	});
-    	
+
     	radiobuttons.setSpacing(5);
     	radiobuttons.getChildren().addAll(rectangle, pen, text, paste, copy, help);
-    	
+
     	HBox buttons = new HBox();
-    	
+
     	ColorPicker cp = new ColorPicker();
     	cp.setMaxSize(45, 60);
     	cp.setValue(Color.BLACK);
@@ -186,7 +186,7 @@ public class GraphicsControl {
     			}
     		}
     	});
-    	
+
     	Button fill = new Button("Fill");
     	fill.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -194,7 +194,7 @@ public class GraphicsControl {
     			main_graphics.Fill();
     		}
     	});
-    	
+
     	Button ontop = new Button("On Top");
     	ontop.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -202,8 +202,8 @@ public class GraphicsControl {
     			main_graphics.onTop();
     		}
     	});
-    	
-    	
+
+
     	Button below = new Button("Below");
     	below.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -211,7 +211,7 @@ public class GraphicsControl {
     			main_graphics.below();
     		}
     	});
-    	
+
     	Button delete = new Button("Cut");
     	delete.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -219,7 +219,7 @@ public class GraphicsControl {
     			main_graphics.deleteElement();
     		}
     	});
-    	
+
     	Button undo = new Button("Undo");
     	undo.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -227,7 +227,7 @@ public class GraphicsControl {
     			main_graphics.Undo();
     		}
     	});
-    	
+
     	Button redo = new Button("Redo");
     	redo.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -235,7 +235,7 @@ public class GraphicsControl {
     			main_graphics.Redo();
     		}
     	});
-    	
+
     	Button setStyle = new Button("Set Text");
     	setStyle.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
     		@Override
@@ -243,13 +243,13 @@ public class GraphicsControl {
     			main_graphics.setTextStyle();
     		}
     	});
-    	
+
     	ObservableList<String> fonts = FXCollections.observableArrayList(Font.getFamilies());
     	graphics_fonts = new ChoiceBox<String>();
     	graphics_fonts.setValue("Arial");
     	graphics_fonts.setMaxWidth(55);
     	graphics_fonts.setItems(fonts);
-    	
+
     	graphics_spinner = new Spinner<Integer>();
     	graphics_spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 12));
     	graphics_spinner.setMaxWidth(60);
@@ -261,27 +261,27 @@ public class GraphicsControl {
     	configureBorder(vbox);
     	vbox.setAlignment(Pos.TOP_LEFT);
     	vbox.getChildren().addAll(radiobuttons, buttons);
-    	
-    	return vbox; 
+
+    	return vbox;
     }
-	
+
 	public Integer getSpinnerValue() {
 		return graphics_spinner.getValue();
 	}
-	
+
 	public Spinner<Integer> getSpinner() {
 		return graphics_spinner;
 	}
-	
+
 	public String getFont() {
 		return graphics_fonts.getValue();
 	}
-	
+
 	public ChoiceBox<String> getFontOptions() {
 		return graphics_fonts;
 	}
-	
-	
+
+
 	/********************************************************************************/
 	/*										*/
 	/*	Border of UI box 						*/
@@ -294,7 +294,7 @@ public class GraphicsControl {
                             + "-fx-border-radius: 6;"
                             + "-fx-padding: 6;");
     }
-    
+
 } // end of class GraphicsControl
 
 /* end of GraphicsControl.java */

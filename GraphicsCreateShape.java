@@ -40,11 +40,11 @@ public class GraphicsCreateShape implements GraphicsCommand {
 		shapes_list = shapes;
 		graphics_shape = shape;
 	}
-	
+
 	public Node getNode() {
 		return graphics_shape.getNode();
 	}
-	
+
 	@Override
 	public void undo() {
 		shapes_list.remove(graphics_shape);

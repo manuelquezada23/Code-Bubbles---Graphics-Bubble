@@ -27,14 +27,14 @@ package edu.brown.cs.bubbles.graphics;
 /********************************************************************************/
 public class GraphicsFactory {
 	private static GraphicsFactory the_factory = null;
-	
+
 	public static synchronized GraphicsFactory getFactory() {
 		if (the_factory == null) {
 			the_factory = new GraphicsFactory();
 		}
 		return the_factory;
 	}
-	
-} // end of class GraphicsFactory 
+
+} // end of class GraphicsFactory
 
 /* end of GraphicsFactory.java */

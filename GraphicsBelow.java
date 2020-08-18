@@ -23,7 +23,7 @@ package edu.brown.cs.bubbles.graphics;
 
 public class GraphicsBelow implements GraphicsCommand {
 	private GraphicsMain main_graphics;
-	
+
 	/********************************************************************************/
 	/*										*/
 	/*	Command class for setting nodes below 						*/
@@ -32,12 +32,12 @@ public class GraphicsBelow implements GraphicsCommand {
 	public GraphicsBelow(GraphicsMain graphics) {
 		main_graphics = graphics;
 	}
-	
+
 	@Override
 	public void undo() {
 		main_graphics.onTop();
 	}
-	
+
 	@Override
 	public void redo() {
 		main_graphics.below();

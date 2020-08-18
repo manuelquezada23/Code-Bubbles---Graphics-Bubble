@@ -27,11 +27,11 @@ package edu.brown.cs.bubbles.graphics;
 /********************************************************************************/
 public class GraphicsonTop implements GraphicsCommand {
 	private GraphicsMain graphics_main;
-	
+
 	public GraphicsonTop(GraphicsMain graphics) {
 		graphics_main = graphics;
 	}
-	
+
 	@Override
 	public void undo() {
 		graphics_main.below();
@@ -42,7 +42,7 @@ public class GraphicsonTop implements GraphicsCommand {
 	public void redo() {
 		System.out.println("redo");
 		graphics_main.onTop();
-		
+
 	}
 } // end of class GraphicsonTop
 

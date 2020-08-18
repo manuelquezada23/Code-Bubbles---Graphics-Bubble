@@ -26,10 +26,10 @@ package edu.brown.cs.bubbles.graphics;
 /*										*/
 /********************************************************************************/
 public interface GraphicsCommand {
-	
+
 	public void undo();
 	public void redo();
-	
+
 } // end of interface GraphicsCommand
 
 /* end of GraphicsCommand.java */

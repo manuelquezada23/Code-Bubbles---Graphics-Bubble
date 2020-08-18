@@ -32,7 +32,7 @@ public class GraphicsCreateImage implements GraphicsCommand {
 	private GraphicsImages graphics_image;
 	private Pane graphics_pane;
 	private ArrayList<GraphicsImages> images_list;
-		
+
 	public GraphicsCreateImage(Pane graphicspane, ArrayList<GraphicsImages> images, GraphicsImages image)  {
 		graphics_pane = graphicspane;
 		images_list = images;

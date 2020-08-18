@@ -32,19 +32,19 @@ public class GraphicsDeleteText implements GraphicsCommand {
 	private Pane graphics_pane;
 	private ArrayList<GraphicsTextBox> texts_list;
 	private GraphicsTextBox graphics_text;
-	
+
 	public GraphicsDeleteText(Pane graphicspane, ArrayList<GraphicsTextBox> texts, GraphicsTextBox text) {
 		graphics_pane = graphicspane;
 		texts_list = texts;
 		graphics_text = text;
 	}
-	
+
 	@Override
 	public void undo() {
 		graphics_pane.getChildren().add(graphics_text.getNode());
 		texts_list.add(graphics_text);
 	}
-	
+
 	@Override
 	public void redo() {
 		graphics_pane.getChildren().remove(graphics_text.getNode());

@@ -37,15 +37,15 @@ public class GraphicsSetText implements GraphicsCommand {
 		System.out.println("old is " + old_style);
 		System.out.println("new is " + new_style);
 	}
-	
+
 	@Override
 	public void undo() {
 		new_style = graphics_text.getStyle();
 		graphics_text.setStyle(old_style);
 	}
-	
+
 	@Override
-	public void redo() {	
+	public void redo() {
 		graphics_text.setStyle(new_style);
 	}
 } // end of class GraphicsSetText

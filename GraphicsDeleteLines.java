@@ -1,6 +1,6 @@
 /********************************************************************************/
 /*										*/
-/*		GraphicsFill.java 					*/
+/*		GraphicsDeleteLines.java 					*/
 /*										*/
 /*	Bubbles Environment Auxillary & Missing items feedback report		*/
 /*										*/
@@ -20,34 +20,36 @@
 
 package edu.brown.cs.bubbles.graphics;
 
-import javafx.scene.paint.Color;
+import java.util.ArrayList;
+import javafx.scene.layout.Pane;
 
 /********************************************************************************/
 /*										*/
-/*	Command class for filling shapes 						*/
+/*	Command class for deleting lines 						*/
 /*										*/
 /********************************************************************************/
-public class GraphicsFill implements GraphicsCommand {
-	private GraphicsShape graphics_shape;
-	private Color new_color;
-	private Color old_color;
-	
-	public GraphicsFill (GraphicsShape shape, Color color) {
-		graphics_shape = shape; 
-		old_color = graphics_shape.getFill();
-		new_color = color;
+public class GraphicsDeleteLines implements GraphicsCommand {
+	private Pane graphics_pane;
+	private ArrayList<GraphicsCurvedLine> lines_list;
+	private GraphicsCurvedLine graphics_line;
+
+	public GraphicsDeleteLines(Pane graphicspane, ArrayList<GraphicsCurvedLine> lines, GraphicsCurvedLine line) {
+		graphics_pane = graphicspane;
+		lines_list = lines;
+		graphics_line = line;
 	}
-	
+
 	@Override
 	public void undo() {
-		new_color = graphics_shape.getFill();
-		graphics_shape.setFill(old_color);
+		graphics_pane.getChildren().add(graphics_line.getNode());
+		lines_list.add(graphics_line);
 	}
- 
+
 	@Override
 	public void redo() {
-		graphics_shape.setFill(new_color);
+		graphics_pane.getChildren().remove(graphics_line.getNode());
+		lines_list.remove(graphics_line);
 	}
-} // end of class GraphicsFill
+} // end of class GraphicsDeleteLines
 
-/* end of GraphicsFill.java */
+/* end of GraphicsDeleteLines.java */

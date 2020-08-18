@@ -37,7 +37,7 @@ public class GraphicsPaneOrganizer {
 	@SuppressWarnings("unused")
 	private GraphicsControl graphics_control;
 	private StackPane stack_pane;
-	
+
 	public GraphicsPaneOrganizer() {
 		root_pane = new BorderPane();
 		root_pane.setFocusTraversable(true);
@@ -45,17 +45,17 @@ public class GraphicsPaneOrganizer {
 		graphics_main = new GraphicsMain(graphicspane);
 		root_pane.setLeft(graphicspane);
 		VBox buttons = new VBox();
-		buttons.setMaxSize(1, 1);		
+		buttons.setMaxSize(1, 1);
 		graphics_control = new GraphicsControl(buttons, graphics_main);
 		stack_pane = new StackPane(graphicspane, buttons);
 		StackPane.setAlignment(buttons, Pos.TOP_LEFT);
 
 	}
-	
+
 	public StackPane getStack() {
 		return stack_pane;
 	}
-	
+
 } // end of class GraphicsPaneOrganizer
 
 /* end of GraphicsPaneOrganizer.java */
