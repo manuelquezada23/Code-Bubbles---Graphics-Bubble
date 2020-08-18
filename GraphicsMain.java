@@ -38,7 +38,7 @@ import javafx.scene.input.MouseEvent;
 
 /********************************************************************************/
 /*										*/
-/*	Class that deals with logic						*/
+/*	Class that deals with logic of the bubble.						*/
 /*										*/
 /********************************************************************************/
 public class GraphicsMain {
