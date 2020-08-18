@@ -369,6 +369,7 @@ public class GraphicsMain {
 				//selecting for texts
 				for (int i = 0; i < texts_list.size(); i++) {
 					if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+						@SuppressWarnings("deprecation")
 						final int innerLoop = new Integer(i);
 						for (int j = 0; j < texts_list.size(); j++) {
 							graphics_text = null;
