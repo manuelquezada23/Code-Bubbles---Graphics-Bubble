@@ -51,15 +51,17 @@ import javafx.stage.Stage;
 /********************************************************************************/
 public class GraphicsControl {
 	private static GraphicsMain main_graphics;
-	private Pane graphics_pane;
+	private static Pane graphics_pane;
 	private static Spinner<Integer> graphics_spinner;
 	private static ChoiceBox<String> graphics_fonts;
 	private Pane panels_pane;
+	private static VBox buttons_toolbar;
+	private static VBox buttons;
 
 	public GraphicsControl(Pane graphicspane, GraphicsMain graphics) {
 		graphics_pane = graphicspane;
 
-		VBox buttons = new VBox();
+		buttons = new VBox();
 		main_graphics = graphics;
 
         Node radiobuttonspanel = createRadioButtonsPanel();
@@ -68,8 +70,20 @@ public class GraphicsControl {
         panels_pane.getChildren().addAll(radiobuttonspanel);
 
         buttons.getChildren().add(panels_pane);
-        graphics_pane.getChildren().add(buttons);
-
+//        graphics_pane.getChildren().add(buttons);
+        
+        buttons_toolbar = new VBox();
+        Button toolbar = new Button();
+        buttons_toolbar.getChildren().add(toolbar);
+        graphics_pane.getChildren().add(buttons_toolbar);
+        
+        toolbar.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				graphics_pane.getChildren().add(buttons);
+				graphics_pane.getChildren().remove(buttons_toolbar);
+			}
+    	});
 
 	}
 
@@ -169,9 +183,20 @@ public class GraphicsControl {
     			stage.show();
     		}
     	});
+    	
+    	Button close = new Button("X");
+    	close.setTranslateX(120);
+    	close.addEventHandler(ActionEvent.ANY, new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent event) {
+    			graphics_pane.getChildren().remove(buttons);
+				graphics_pane.getChildren().add(buttons_toolbar);
+    		}
+    		
+    	});
 
     	radiobuttons.setSpacing(5);
-    	radiobuttons.getChildren().addAll(rectangle, pen, text, paste, copy, help);
+    	radiobuttons.getChildren().addAll(rectangle, pen, text, paste, copy, help, close);
 
     	HBox buttons = new HBox();
 

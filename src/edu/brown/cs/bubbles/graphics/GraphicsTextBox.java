@@ -85,6 +85,18 @@ public class GraphicsTextBox {
 		});
 	}	
 	
+	public void enableDragging(Node node) {
+		final ObjectProperty<Point2D> mouse = new SimpleObjectProperty<>();
+		System.out.println(mouse);
+		node.setOnMousePressed( event -> mouse.set(new Point2D(event.getSceneX(), event.getSceneY())));
+		node.setOnMouseDragged( event -> {
+			double x = event.getSceneX() - mouse.get().getX();
+			double y = event.getSceneY() - mouse.get().getY();
+			node.relocate(node.getLayoutX() + x, node.getLayoutY() + y);
+			mouse.set(new Point2D(event.getSceneX(), event.getSceneY()));;
+		});
+	}
+	
 	public void moveText(Point2D prev, Point2D curr) {
 		Double xLoc = prev.getX() - this.getXLoc();
 		Double yLoc = prev.getY() - this.getYLoc();
@@ -133,18 +145,6 @@ public class GraphicsTextBox {
 		return graphics_pane.isFocused();
 	}
 	
-	public void enableDragging(Node node) {
-		final ObjectProperty<Point2D> mouse = new SimpleObjectProperty<>();
-		System.out.println(mouse);
-		node.setOnMousePressed( event -> mouse.set(new Point2D(event.getSceneX(), event.getSceneY())));
-		node.setOnMouseDragged( event -> {
-			double x = event.getSceneX() - mouse.get().getX();
-			double y = event.getSceneY() - mouse.get().getY();
-			node.relocate(node.getLayoutX() + x, node.getLayoutY() + y);
-			mouse.set(new Point2D(event.getSceneX(), event.getSceneY()));;
-		});
-	}
-	
 	public void setXLoc(double x) { 
 		text_area.setLayoutX(x);
 	}
@@ -164,14 +164,6 @@ public class GraphicsTextBox {
 	public double rotateShape(Point2D prev, Point2D curr) {
 		shape_rotate = Math.atan2(prev.getY() - this.getCenter().getY(), prev.getX() - this.getCenter().getX()) - Math.atan2(curr.getY() - this.getCenter().getY(), curr.getX() - this.getCenter().getX());
 		return Math.toDegrees(- shape_rotate);
-	}
-	
-	public void moveShape(Point2D prev, Point2D curr) {
-		Double xLoc = prev.getX() - this.getXLoc();
-		Double yLoc = prev.getY() - this.getYLoc();
-		Double dx = curr.getX() - xLoc;
-		Double dy = curr.getY() - yLoc;
-		this.setLocation(dx, dy);
 	}
 	
 	public void resizeShape(Point2D prev, Point2D curr) {
